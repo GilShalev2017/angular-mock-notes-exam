@@ -1,0 +1,57 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <!-- Updating badge -->
+    @if (isStale()) {
+      <span class="updating-badge">
+        <mat-icon class="spin">autorenew</mat-icon>
+        Updating…
+      </span>
+    }
+    <button mat-raised-button color="primary" (click)="configure()">
+      <mat-icon>settings</mat-icon>
+      Configure Dashboard
+    </button>
+  </div>
+
+  @if (existingControls().length === 0) {
+    <div class="no-controls">
+      <mat-icon>dashboard</mat-icon>
+      <h2>No controls added yet</h2>
+      <p>Click the "Configure Dashboard" button to add controls</p>
+    </div>
+  } @else {
+    <div class="controls-grid">
+      @for (control of existingControls(); track control!.id) {
+        <div class="control-item">
+          @switch (control!.type) {
+            @case ('temperature') {
+              <app-temperature
+                [controlData]="control"
+                (valueChange)="onGauageValueChanged(control, $event)"
+              ></app-temperature>
+            }
+            @case ('pressure') {
+              <app-pressure
+                [controlData]="control"
+                (valueChange)="onGauageValueChanged(control, $event)"
+              ></app-pressure>
+            }
+            @case ('speed') {
+              <app-speed
+                [controlData]="control"
+                (valueChange)="onGauageValueChanged(control, $event)"
+              ></app-speed>
+            }
+            @case ('energyLevel') {
+              <app-energy-level
+                [controlData]="control"
+                (valueChange)="onGauageValueChanged(control, $event)"
+              ></app-energy-level>
+            }
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

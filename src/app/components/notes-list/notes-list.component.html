@@ -1,0 +1,76 @@
+<div class="notes-container">
+  <!-- Search Bar -->
+  <div class="search-section">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search notes</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Search notes..."
+        (input)="onSearch($event.target.value)"
+      />
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <!-- Notes List -->
+  <div class="notes-list-section">
+    <div class="list-header">
+      <h3>Notes</h3>
+      <span class="note-count">{{ notesSvc.filteredNotes().length }}</span>
+    </div>
+
+    <ul class="notes-list">
+      @for (note of notesSvc.filteredNotes(); track note.id) {
+        <li
+          class="note-item"
+          [class.selected]="note.id === notesSvc.selectedNoteId()"
+          (click)="notesSvc.selectNote(note.id)"
+        >
+          <div class="note-content">
+            <mat-icon class="note-icon">description</mat-icon>
+            <span class="note-title">{{ note.title }}</span>
+          </div>
+          <button
+            mat-icon-button
+            class="delete-btn"
+            (click)="delete(note.id); $event.stopPropagation()"
+            [attr.aria-label]="'Delete ' + note.title"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </li>
+      } @empty {
+        <div class="empty-state">
+          <mat-icon>inbox</mat-icon>
+          <p>No notes found</p>
+        </div>
+      }
+    </ul>
+  </div>
+
+  <!-- Note Editor -->
+  <div class="editor-section">
+    @if (notesSvc.selectedNote()) {
+      <div class="editor-header">
+        <h3>{{ notesSvc.selectedNote()?.title }}</h3>
+      </div>
+      <mat-form-field appearance="outline" class="editor-field">
+        <mat-label>Note content</mat-label>
+        <textarea
+          matInput
+          #noteTextarea
+          [value]="notesSvc.selectedNote()?.content"
+          (input)="onEdit(noteTextarea.value)"
+          rows="15"
+          placeholder="Start typing..."
+        ></textarea>
+      </mat-form-field>
+    } @else {
+      <div class="empty-editor">
+        <mat-icon>edit_note</mat-icon>
+        <p>Select a note to edit</p>
+      </div>
+    }
+  </div>
+</div>

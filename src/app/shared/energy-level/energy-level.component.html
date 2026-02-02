@@ -1,0 +1,15 @@
+<div>
+  <input matInput placeholder="Energy Level" type="number" [(ngModel)]="controlData!.value" />
+</div>
+
+<mat-card class="example-card">
+  <mat-card-content>
+    <h2 class="example-h2">Energy Level</h2>
+
+    <mat-progress-spinner
+        class="example-margin"
+        [mode]="mode"
+        [value]="controlData!.value">
+    </mat-progress-spinner>
+  </mat-card-content>
+</mat-card>

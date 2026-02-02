@@ -1,0 +1,32 @@
+<div class="gauge-container">
+  <h2>Pressure Monitor</h2>
+
+  <ngx-gauge
+    [type]="'full'"
+    [value]="controlData!.value"
+    [min]="minPressure"
+    [max]="maxPressure"
+    [label]="'Pressure'"
+    [append]="'PSI'"
+    [thick]="12"
+    [cap]="'round'"
+    [size]="300"
+    [foregroundColor]="gaugeColor"
+    [backgroundColor]="'#e0e0e0'"
+    [thresholds]="pressureThresholds"
+    [markers]="pressureMarkers"
+  >
+  </ngx-gauge>
+
+  <div class="pressure-info">
+    <p>Current: {{ controlData!.value }} PSI</p>
+    <p>Status: {{ getPressureStatus() }}</p>
+  </div>
+
+  <!-- Simulate pressure changes -->
+  <div class="controls">
+    <button (click)="increasePressure()">Increase</button>
+    <button (click)="decreasePressure()">Decrease</button>
+    <button (click)="resetPressure()">Reset</button>
+  </div>
+</div>

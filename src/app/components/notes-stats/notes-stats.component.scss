@@ -1,0 +1,42 @@
+.notes-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.stats-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.stats-icon {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.stats-label {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 400;
+}
+
+.stats-value {
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 500;
+}
+
+.syncing {
+  color: #3f51b5;
+}
+
+.syncing .stats-label {
+  color: #3f51b5;
+  font-weight: 500;
+}

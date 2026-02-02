@@ -1,0 +1,22 @@
+<div class="notes-stats">
+  <div class="stats-item">
+    <mat-icon class="stats-icon">description</mat-icon>
+    <span class="stats-label">Total notes:</span>
+    <span class="stats-value">{{ notesSvc.noteCount() }}</span>
+  </div>
+
+  @if (notesSvc.lastUpdated()) {
+    <div class="stats-item">
+      <mat-icon class="stats-icon">schedule</mat-icon>
+      <span class="stats-label">Last updated:</span>
+      <span class="stats-value">{{ notesSvc.lastUpdated() }}</span>
+    </div>
+  }
+
+  @if (notesSvc.isSyncing()) {
+    <div class="stats-item syncing">
+      <mat-spinner diameter="20" strokeWidth="2"></mat-spinner>
+      <span class="stats-label">Syncing...</span>
+    </div>
+  }
+</div>
